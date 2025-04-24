@@ -47,6 +47,11 @@ def sum(df1: pd.DataFrame, column) -> dict:
 def echo(df1: pd.DataFrame, input) -> dict:    
     return {"echo": input}
 
+@federated
+@data(1)
+def len(df1: pd.DataFrame, column) -> dict:    
+    return {"len": int(df1[column].size)}
+
 
 @federated
 @data(1)
@@ -57,6 +62,9 @@ def federated_avg(df1: pd.DataFrame, column) -> dict:
     # compute the sum, and count number of rows
     local_sum = numbers.sum()
     local_count = len(numbers)
+
+    print(f">>>>>>>>>localsum:{local_sum}, {type(local_sum)}")
+    print(f">>>>>>>>>localcount:{local_count}, {type(local_count)}")
 
     # return the values as a dict
     return {
