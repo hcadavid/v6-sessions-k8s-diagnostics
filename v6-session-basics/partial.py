@@ -40,3 +40,21 @@ def pre_process2(df1: pd.DataFrame, column, new_column) -> pd.DataFrame:
 @data(1)
 def sum(df1: pd.DataFrame, column) -> dict:
     return {"sum": int(df1[column].sum())}
+
+
+@federated
+@data(1)
+def federated_avg(df1: pd.DataFrame, column) -> dict:
+    # extract the column numbers from the CSV
+    numbers = df1[column]
+
+    # compute the sum, and count number of rows
+    local_sum = numbers.sum()
+    local_count = len(numbers)
+
+    # return the values as a dict
+    return {
+        "sum": local_sum,
+        "count": local_count
+    }  
+
