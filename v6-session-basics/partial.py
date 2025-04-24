@@ -44,6 +44,15 @@ def sum(df1: pd.DataFrame, column) -> dict:
 
 @federated
 @data(1)
+def len(df1: pd.DataFrame, column) -> dict:
+    numbers = df1[column]
+    local_count = len(numbers)
+    
+    return {"len": int(local_count)}
+
+
+@federated
+@data(1)
 def federated_avg(df1: pd.DataFrame, column) -> dict:
     # extract the column numbers from the CSV
     numbers = df1[column]
@@ -54,7 +63,7 @@ def federated_avg(df1: pd.DataFrame, column) -> dict:
 
     # return the values as a dict
     return {
-        "sum": local_sum,
-        "count": local_count
+        "sum": int(local_sum),
+        "count": int(local_count)
     }  
 
