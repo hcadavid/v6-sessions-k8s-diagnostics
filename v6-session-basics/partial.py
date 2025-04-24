@@ -44,11 +44,8 @@ def sum(df1: pd.DataFrame, column) -> dict:
 
 @federated
 @data(1)
-def len(df1: pd.DataFrame, column) -> dict:
-    numbers = df1[column]
-    local_count = len(numbers)
-    
-    return {"len": int(local_count)}
+def echo(df1: pd.DataFrame, input) -> dict:    
+    return {"echo": input}
 
 
 @federated
