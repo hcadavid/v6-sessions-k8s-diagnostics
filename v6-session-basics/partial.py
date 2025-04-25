@@ -10,7 +10,7 @@ or directly to the user (if they requested partial results).
 import pandas as pd
 from vantage6.algorithm.decorator import data, source_database
 from vantage6.algorithm.client import AlgorithmClient
-from vantage6.algorithm.tools.decorators import algorithm_client, data
+from vantage6.algorithm.decorator import algorithm_client, data
 from vantage6.algorithm.decorator.action import (
     data_extraction,
     pre_processing,
