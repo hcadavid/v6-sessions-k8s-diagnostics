@@ -57,7 +57,7 @@ def len(df1: pd.DataFrame, column) -> dict:
 @data(1)
 def fed_avg(df1: pd.DataFrame, column) -> dict:    
     numbers = df1[column]
-    return {"len": int(numbers.size),"data":numbers.sum()}
+    return {"len": int(numbers.size),"data":int(numbers.sum())}
 
 
 @federated
