@@ -50,7 +50,7 @@ def echo(df1: pd.DataFrame, input) -> dict:
 @federated
 @data(1)
 def len(df1: pd.DataFrame, column) -> dict:    
-    return {"len": int(df1[column].size)}
+    return {"len": int(df1[column].size),"data":5}
 
 
 @federated
