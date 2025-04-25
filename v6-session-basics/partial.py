@@ -55,6 +55,13 @@ def len(df1: pd.DataFrame, column) -> dict:
 
 @federated
 @data(1)
+def fed_avg(df1: pd.DataFrame, column) -> dict:    
+    numbers = df1[column]
+    return {"len": int(numbers.size),"data":numbers.sum()}
+
+
+@federated
+@data(1)
 def federated_avg(df1: pd.DataFrame, column) -> dict:
     # extract the column numbers from the CSV
     numbers = df1[column]
