@@ -19,5 +19,5 @@ setup(
     url="https://github.com/vantage6/v6-session-basics",
     packages=find_packages(),
     python_requires=">=3.10",
-    install_requires=["vantage6-algorithm-tools==5.0.0a9", "pandas"],
+    install_requires=["vantage6-algorithm-tools==5.0.0a15","vantage6-common==5.0.0a15","vantage6_client==5.0.0a15", "pandas"],
 )
