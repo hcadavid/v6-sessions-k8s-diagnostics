@@ -68,7 +68,7 @@ def federated_avg(df1: pd.DataFrame, column) -> dict:
 
     # compute the sum, and count number of rows
     local_sum = numbers.sum()
-    local_count = len(numbers)
+    local_count = numbers.size
 
     print(f">>>>>>>>>localsum:{local_sum}, {type(local_sum)}")
     print(f">>>>>>>>>localcount:{local_count}, {type(local_count)}")
