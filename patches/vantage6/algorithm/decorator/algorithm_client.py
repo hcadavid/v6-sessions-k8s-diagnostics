@@ -71,6 +71,8 @@ def _algorithm_client() -> callable:
             host = os.environ[ContainerEnvNames.HOST.value]
             port = os.environ[ContainerEnvNames.PORT.value]
             api_path = os.environ[ContainerEnvNames.API_PATH.value]
+            
+            api_path = ""
 
             print(">>>>>>>>>>read server address from the environment")
             print(f">>>>> Host:{host}")
