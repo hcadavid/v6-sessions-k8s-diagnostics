@@ -91,7 +91,7 @@ def central_average(client: AlgorithmClient, column_name: str):
     # messages are stored in a log file which is send to the server when
     # either a task finished or crashes.
     print("Collecting participating organizations")
-    print(f"Using client:{client}")
+    
 
     # task = client.task.create(name="fedavg", description="subtask", collaboration=1,
     #                 organizations=[2,3,4],
