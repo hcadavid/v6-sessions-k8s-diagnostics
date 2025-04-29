@@ -74,28 +74,6 @@ def is_proxy_reachable(host: str, port: int):
         socket.setdefaulttimeout(None)
 
 
-def is_proxy_reachable(host:str,port:int):
-    try:
-        info(f"Checking if the FQDN of the node proxy ({host}:{str(port)}) can be resolved... ")
-        ipaddr = socket.gethostbyname("v6proxy-subdomain.v6-jobs.svc.cluster.local") 
-        info(f"FQDN of the node proxy ({host}:{str(port)}) resolved as {ipaddr}... ")    
-
-        # Check if the port is listening
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        result = sock.connect_ex((ipaddr, int(port)))
-        
-        if result == 0:
-            info(f"Port {port} is open on IP address {ipaddr}")
-            return True
-        else:
-            info(f"Port {port} is closed on IP address {ipaddr}")
-            return False
-
-
-        return True
-    except socket.gaierror:
-        return False
-
 
 def check_http_connection():
         try:
