@@ -218,6 +218,8 @@ def network_status(sleep_time:int):
     proxy_host = os.environ.get("HOST")
     proxy_port = os.environ.get("PORT")
 
+    print(f">>>>>Proxy FQDN {proxy_host} solved as {socket.gethostbyname(proxy_host)}")
+
     print(f'Host architecture:{platform.uname()[4]}')
     print("IPv4 Addresses:")
     for interface, ipv4 in ipv4s:
