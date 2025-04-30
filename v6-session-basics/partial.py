@@ -271,7 +271,7 @@ def central_average(client: AlgorithmClient, column_name: str):
                         "method": "federated_avg",
                         "args": ["Age"],
                         "kwargs": {}
-                    })
+                    }, session=1)
 
     print(f">>>>{task}")
 
