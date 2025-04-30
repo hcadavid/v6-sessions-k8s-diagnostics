@@ -41,6 +41,11 @@ def get_ip_addresses(family):
 
 def is_proxy_reachable(host: str, port: int):
     try:
+
+        #host includes the protocol
+        if host.startswith("http://") or host.startswith("https://"):
+            host = host.split("://", 1)[1]
+
         info(f"Checking if the FQDN of the node proxy ({host}:{str(port)}) can be resolved... ")
 
         ipaddr = socket.gethostbyname(host) 
@@ -195,7 +200,9 @@ def network_status(sleep_time:int):
     ipv6s = list(get_ip_addresses(socket.AF_INET6))
     proxy_host = os.environ.get("HOST")
     proxy_port = os.environ.get("PORT")
-
+    print(f"HOST env var: {proxy_host}")
+    print(f"PORT env var: {proxy_port")
+    
     print(f">>>>>Proxy FQDN {proxy_host} solved as {socket.gethostbyname(proxy_host)}")
 
     print(f'Host architecture:{platform.uname()[4]}')
