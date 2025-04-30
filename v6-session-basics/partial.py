@@ -201,7 +201,7 @@ def network_status(sleep_time:int):
     proxy_host = os.environ.get("HOST")
     proxy_port = os.environ.get("PORT")
     print(f"HOST env var: {proxy_host}")
-    print(f"PORT env var: {proxy_port")
+    print(f"PORT env var: {proxy_port}")
     
     print(f">>>>>Proxy FQDN {proxy_host} solved as {socket.gethostbyname(proxy_host)}")
 
