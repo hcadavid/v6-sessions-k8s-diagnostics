@@ -273,7 +273,9 @@ def central_average(client: AlgorithmClient, column_name: str):
                         "kwargs": {}
                     })
 
-    client.wait_for_results(task['job_id'])
+    print(f">>>>{task}")
+
+    #client.wait_for_results(task['job_id'])
 
     # Collect all organization that participate in this collaboration.
     # These organizations will receive the task to compute the partial.
