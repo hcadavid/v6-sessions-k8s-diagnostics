@@ -391,6 +391,8 @@ class AlgorithmClient(ClientBase):
             for org_id in organizations:
                 organization_json_list.append({"id": org_id, "input": serialized_input})
 
+            print(f">>>> input_ args:{input_}")
+
             json_body = {
                 "name": name,
                 "image": self.parent.image,
