@@ -273,7 +273,19 @@ def central_average(client: AlgorithmClient, column_name: str):
                         "kwargs": {}
                     }, session=1)
 
-    print(f">>>>{task}")
+    info("Waiting for results...")
+    results = client.wait_for_results(task_id=task.get("id"))
+    info("Partial results are in!")
+
+    # Now we can combine the partials to a global average.
+    info("Computing global average")
+    global_sum = 0
+    global_count = 0
+    for output in results:
+        global_sum += output["sum"]
+        global_count += output["count"]
+
+    return {"average": 0.5}
 
     #client.wait_for_results(task['job_id'])
 
@@ -308,4 +320,4 @@ def central_average(client: AlgorithmClient, column_name: str):
     #     global_sum += output["sum"]
     #     global_count += output["count"]
 
-    return {"average": 0.5}
+    #return {"average": 0.5}
