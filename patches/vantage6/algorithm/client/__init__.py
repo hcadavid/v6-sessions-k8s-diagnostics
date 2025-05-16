@@ -399,7 +399,8 @@ class AlgorithmClient(ClientBase):
                 "organizations": organization_json_list,
                 "databases": self.parent.databases,
                 "session_id": session,
-                "method": "central_average"
+                "method": "central_average",
+                "action": "federated compute",
             }
             if self.parent.study_id:
                 json_body["study_id"] = self.parent.study_id
