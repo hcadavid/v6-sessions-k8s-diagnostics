@@ -42,6 +42,8 @@ class AlgorithmClient(ClientBase):
     def __init__(self, token: str, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
+        self.log.debug(f">>>>>>> [Node {self.node_id}] initializing proxy client")
+
         # obtain the identity from the token
         jwt_payload = jwt.decode(token, options={"verify_signature": False})
 
@@ -87,6 +89,7 @@ class AlgorithmClient(ClientBase):
         dict
             Response from the central server.
         """
+        self.log.debug(f">>>>>>> [Node {self.node_id}] creating a request using the proxy client")
         return super().request(*args, **kwargs, retry=False)
 
     def authenticate(self, credentials: dict = None, path: str = None) -> None:
