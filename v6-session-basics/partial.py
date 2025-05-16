@@ -275,10 +275,19 @@ def central_average(client: AlgorithmClient, column_name: str):
 
     info("Waiting 10 seconds")
     time.sleep(10)
-    #info("Waiting for results...")
-    #results = client.wait_for_results(task_id=task.get("id"))
-    #info("Partial results are in!")
+    info("Waiting for results...")
+    results = client.wait_for_results(task_id=task.get("id"))
+    info("Partial results are in!")
 
+    info("Computing global average")
+    global_sum = 0
+    global_count = 0
+    for output in results:
+        global_sum += output["sum"]
+        global_count += output["count"]
+
+    print(f">>>{global_sum}")
+    print(f">>>{global_count}")
     # Now we can combine the partials to a global average.
     #info("Computing global average")
     #global_sum = 0
