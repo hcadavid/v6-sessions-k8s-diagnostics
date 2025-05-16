@@ -181,6 +181,8 @@ def federated_avg(df1: pd.DataFrame, column) -> dict:
     print(f">>>>>>>>>localsum:{local_sum}, {type(local_sum)}")
     print(f">>>>>>>>>localcount:{local_count}, {type(local_count)}")
 
+    time.sleep(15)
+
     # return the values as a dict
     return {
         "sum": int(local_sum),
