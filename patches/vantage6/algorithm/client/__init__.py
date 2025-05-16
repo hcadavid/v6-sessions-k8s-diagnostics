@@ -339,12 +339,15 @@ class AlgorithmClient(ClientBase):
             """
             return self.parent.request(f"task/{task_id}")
 
+        ###>>>>>>>>>>>>>>
+
         def create(
             self,
             input_: dict,
+            session: int,
             organizations: list[int] = None,
             name: str = "subtask",
-            description: str = None,
+            description: str = None,            
         ) -> dict:
             """
             Create a new (child) task at the central server.
@@ -370,6 +373,9 @@ class AlgorithmClient(ClientBase):
             dict
                 Dictionary containing information on the created task
             """
+
+            print(f"Got a session id:{session}")
+
             if not organizations:
                 organizations = []
             self.parent.log.debug(f"Creating new subtask for {organizations}")
