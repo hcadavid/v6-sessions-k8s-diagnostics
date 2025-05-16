@@ -391,8 +391,6 @@ class AlgorithmClient(ClientBase):
             for org_id in organizations:
                 organization_json_list.append({"id": org_id, "input": serialized_input})
 
-            print(f">>>> input_ args:{input_}")
-
             json_body = {
                 "name": name,
                 "image": self.parent.image,
@@ -401,7 +399,7 @@ class AlgorithmClient(ClientBase):
                 "organizations": organization_json_list,
                 "databases": self.parent.databases,
                 "session_id": session,
-                "method": "central_average",
+                "method": input_['method'],
                 "action": "federated compute",
             }
             if self.parent.study_id:
