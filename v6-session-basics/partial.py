@@ -261,9 +261,10 @@ def central_average(client: AlgorithmClient, column_name: str, session_id: int):
     ids = [organization.get("id") for organization in organizations]
 
     task = client.task.create(name="central-fedavg", description="subtask",
-                    organizations=ids,                    
+                    organizations=ids,
+                    method="federated_avg",             
                     input_={
-                        "method": "federated_avg",
+                        #"method": "federated_avg",
                         "args": ["Age"],
                         "kwargs": {}
                     }, session=session_id)

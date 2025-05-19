@@ -42,8 +42,6 @@ class AlgorithmClient(ClientBase):
     def __init__(self, token: str, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-        self.log.debug(f">>>>>>> [Initializing proxy client")
-
         # obtain the identity from the token
         jwt_payload = jwt.decode(token, options={"verify_signature": False})
 
@@ -89,7 +87,6 @@ class AlgorithmClient(ClientBase):
         dict
             Response from the central server.
         """
-        self.log.debug(f">>>>>>> [Node] creating a request using the proxy client")
         return super().request(*args, **kwargs, retry=False)
 
     def authenticate(self, credentials: dict = None, path: str = None) -> None:
@@ -339,15 +336,14 @@ class AlgorithmClient(ClientBase):
             """
             return self.parent.request(f"task/{task_id}")
 
-        ###>>>>>>>>>>>>>>
-
         def create(
             self,
             input_: dict,
             session: int,
+            method: str,
             organizations: list[int] = None,
             name: str = "subtask",
-            description: str = None,            
+            description: str = None,
         ) -> dict:
             """
             Create a new (child) task at the central server.
@@ -373,9 +369,6 @@ class AlgorithmClient(ClientBase):
             dict
                 Dictionary containing information on the created task
             """
-
-            print(f"Got a session id:{session}")
-
             if not organizations:
                 organizations = []
             self.parent.log.debug(f"Creating new subtask for {organizations}")
@@ -399,7 +392,7 @@ class AlgorithmClient(ClientBase):
                 "organizations": organization_json_list,
                 "databases": self.parent.databases,
                 "session_id": session,
-                "method": input_['method'],
+                "method": method,
                 "action": "federated compute",
             }
             if self.parent.study_id:
