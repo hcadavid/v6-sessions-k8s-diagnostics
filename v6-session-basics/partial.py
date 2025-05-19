@@ -273,6 +273,7 @@ def central_average(client: AlgorithmClient, column_name: str, session_id: int):
     results = client.wait_for_results(task_id=task.get("id"))
     info("Partial results are in!")
 
+
     info("Computing global average")
     global_sum = 0
     global_count = 0
