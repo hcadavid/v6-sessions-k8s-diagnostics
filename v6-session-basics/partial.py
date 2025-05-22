@@ -269,7 +269,7 @@ def central_average(client: AlgorithmClient, column_name: str, session_id: int):
                         "kwargs": {}
                     }, session=session_id)
 
-    info(f"Waiting for results...{task.get("id")}")
+    info(f"Waiting for results...{task.get('id')}")
     results = client.wait_for_results(task_id=task.get("id"))
     info("Partial results are in!")
 
