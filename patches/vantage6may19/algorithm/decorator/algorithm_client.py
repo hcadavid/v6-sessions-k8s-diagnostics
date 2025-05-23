@@ -21,9 +21,6 @@ def _algorithm_client() -> callable:
     MockAlgorithmClient to the front of the argument list instead of the
     regular AlgorithmClient.
 
-    This function expect the ``CONTAINER_TOKEN`` environment variable to be set.
-    If this is not the case, the function will exit with an error message.
-
     Parameters
     ----------
     func : callable
@@ -58,13 +55,17 @@ def _algorithm_client() -> callable:
                 return func(mock_client, *args, **kwargs)
 
             # read token from the environment
-            token = os.environ.get(ContainerEnvNames.CONTAINER_TOKEN.value)
-            if not token:
+            token_file = os.environ.get(ContainerEnvNames.TOKEN_FILE.value)
+            if not token_file:
                 error(
-                    "Token not found. Is the method you called started as a "
+                    "Token file not found. Is the method you called started as a "
                     "compute container? Exiting..."
                 )
                 exit(1)
+
+            info("Reading token")
+            with open(token_file) as fp:
+                token = fp.read().strip()
 
             # read server address from the environment
             host = os.environ[ContainerEnvNames.HOST.value]

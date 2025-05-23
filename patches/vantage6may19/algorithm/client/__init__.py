@@ -8,7 +8,7 @@ from typing import Any
 
 from vantage6.common.client.client_base import ClientBase
 from vantage6.common import base64s_to_bytes, bytes_to_base64s
-from vantage6.common.enum import RunStatus, AlgorithmStepType
+from vantage6.common.enum import RunStatus
 from vantage6.common.serialization import serialize
 from vantage6.algorithm.tools.util import info
 
@@ -357,8 +357,6 @@ class AlgorithmClient(ClientBase):
             input_ : dict
                 Input to the task. This dictionary usually contains the algorithm method
                 to call and the arguments to pass to the method.
-            session: the id of the session the task will run on
-            method: the name of the method (from the algorithm's image) to be executed
             organizations : list[int]
                 List of organization IDs that should execute the task.
             name: str, optional
@@ -395,7 +393,7 @@ class AlgorithmClient(ClientBase):
                 "databases": self.parent.databases,
                 "session_id": session,
                 "method": method,
-                "action": AlgorithmStepType.FEDERATED_COMPUTE,
+                "action": "federated compute",
             }
             if self.parent.study_id:
                 json_body["study_id"] = self.parent.study_id
