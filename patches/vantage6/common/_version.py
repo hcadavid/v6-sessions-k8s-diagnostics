@@ -15,7 +15,7 @@ version = f"{version_info[0]}.{version_info[1]}.{version_info[2]}"
 pre_release = (
     ""
     if version_info[3] == "final"
-    else "." + _specifier_[version_info[3]] + str(version_info[4])
+    else _specifier_[version_info[3]] + str(version_info[4])
 )
 post_release = "" if not version_info[5] else f".post{version_info[5]}"
 
