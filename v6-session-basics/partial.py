@@ -126,8 +126,14 @@ def external_dns_reachable():
 
 @data_extraction
 @source_database
-def read_csv(database_uri: str) -> dict:
-    return pd.read_csv(database_uri)
+def read_csv(connection_details: dict) -> dict:
+    info(f"Reading CSV file from {connection_details['uri']}")
+    return pd.read_csv(connection_details["uri"])
+
+# @data_extraction
+# @source_database
+# def read_csv(database_uri: str) -> dict:
+#     return pd.read_csv(database_uri)
 
 
 @pre_processing
