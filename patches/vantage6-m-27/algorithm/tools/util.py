@@ -202,10 +202,15 @@ def get_action() -> AlgorithmStepType:
 
     requested_action = os.environ[ContainerEnvNames.FUNCTION_ACTION.value]
     try:
+        
+        print(">>>>>>AlgorithmStepType enum:")
+        for attr in dir(AlgorithmStepType):
+            if not attr.startswith("__"):
+                print(f"  {attr}: {getattr(AlgorithmStepType, attr)}")
         action = AlgorithmStepType(requested_action)
     except ValueError as exc:
         raise EnvironmentVariableError(
-            f"Environment variable {ContainerEnvNames.FUNCTION_ACTION.value} has value "
+            f">>>>>>Environment variable {ContainerEnvNames.FUNCTION_ACTION.value} has value "
             f"'{requested_action}' which is not a valid action."
         ) from exc
 
