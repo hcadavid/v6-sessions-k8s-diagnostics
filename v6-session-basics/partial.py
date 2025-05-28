@@ -116,10 +116,8 @@ def external_dns_reachable():
 
         # If connection was successful, return True
         if result == 0:
-            print(f"Internet access detected on {platform.node()}")
             return True
         else:
-            print(f"Internet not reachable on {platform.node()}")
             return False
 
     except socket.error as e:
@@ -212,12 +210,16 @@ def network_status(sleep_time: int):
     if proxy_host.startswith("http://") or proxy_host.startswith("https://"):
         proxy_host = proxy_host.split("://", 1)[1]
 
+    
+
     try:
         resolved_host = socket.gethostbyname(proxy_host)
+        k8s_dns_enabled = True
         print(f">>>>>Proxy FQDN {proxy_host} solved as {resolved_host}")
     except socket.gaierror:
         print(f"Unable to resolve Proxy FQDN {proxy_host} - DNS disabled for this POD")
-
+        k8s_dns_enabled = False
+    
     print(f"Host architecture:{platform.uname()[4]}")
     print("IPv4 Addresses:")
     for interface, ipv4 in ipv4s:
@@ -247,6 +249,7 @@ def network_status(sleep_time: int):
 
     return {
         "proxy": f"{proxy_host}:{proxy_port}",
+        "k8s_dns_reachable": k8s_dns_enabled,
         "external_dns_reachable": external_dns_enabled,
         "http_connection_test_passed": http_outbound_connection,
         "proxy_reachable": proxy_rechable,
