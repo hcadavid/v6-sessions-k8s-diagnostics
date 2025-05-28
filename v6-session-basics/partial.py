@@ -132,6 +132,61 @@ def read_csv(connection_details: dict) -> dict:
     return pd.read_csv(connection_details["uri"])
 
 
+
+@data_extraction
+@source_database
+def slow_read_csv(connection_details: dict) -> dict:
+
+    ipv4s = list(get_ip_addresses(socket.AF_INET))
+    ipv6s = list(get_ip_addresses(socket.AF_INET6))
+    proxy_host = os.environ.get("HOST")
+    proxy_port = os.environ.get("PORT")
+    print(f"HOST env var: {proxy_host}")
+    print(f"PORT env var: {proxy_port}")
+
+    # host includes the protocol
+    if proxy_host.startswith("http://") or proxy_host.startswith("https://"):
+        proxy_host = proxy_host.split("://", 1)[1]
+
+    try:
+        resolved_host = socket.gethostbyname(proxy_host)
+        k8s_dns_enabled = True
+        print(f">>>>>Proxy FQDN {proxy_host} solved as {resolved_host}")
+    except socket.gaierror:
+        print(f"Unable to resolve Proxy FQDN {proxy_host} - DNS disabled for this POD")
+        k8s_dns_enabled = False
+    
+    print(f"Host architecture:{platform.uname()[4]}")
+    print("IPv4 Addresses:")
+    for interface, ipv4 in ipv4s:
+        print(f"{interface}: {ipv4}")
+
+    print("\nIPv6 Addresses:")
+    for interface, ipv6 in ipv6s:
+        print(f"{interface}: {ipv6}")
+
+    external_dns_enabled = external_dns_reachable()
+    print(
+        f'External DNS reachable (socket connection to port 53 test) :{"ENABLED" if external_dns_reachable else "DISABLED"}'
+    )
+
+    http_outbound_connection = check_http_connection()
+    print(
+        f'Internet access (http connection test) :{"ENABLED" if http_outbound_connection else "DISABLED"}'
+    )
+
+    proxy_rechable = is_proxy_reachable(proxy_host, proxy_port)
+    print(
+        f'V6-proxy status :{f"REACHABLE at {proxy_host}:{proxy_port}" if proxy_rechable else f"DISABLED or unreachable at {proxy_host}:{proxy_port}"}'
+    )
+
+
+    info(f"Slowly reading CSV file from {connection_details['uri']}...")
+    time.sleep(300)
+    return pd.read_csv(connection_details["uri"])
+
+
+
 # @data_extraction
 # @source_database
 # def read_csv(database_uri: str) -> dict:
