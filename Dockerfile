@@ -10,7 +10,7 @@ COPY . /app
 RUN pip install /app
 
 # Copy the contents of the 'patches' folder (excluding the folder itself)
-COPY patches/ /usr/local/lib/python3.10/site-packages/
+# COPY patches/ /usr/local/lib/python3.10/site-packages/
 
 # Set environment variable to make name of the package available within the
 # docker image.

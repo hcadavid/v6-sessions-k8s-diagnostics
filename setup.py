@@ -20,9 +20,9 @@ setup(
     packages=find_packages(),
     python_requires=">=3.10",
     install_requires=[
-        "vantage6-algorithm-tools==5.0.0a17",
-        "vantage6-common==5.0.0a17",
-        "vantage6_client==5.0.0a17", 
+        "vantage6-algorithm-tools==5.0.0a20",
+        "vantage6-common==5.0.0a20",
+        "vantage6_client==5.0.0a20", 
         "pandas",
         "psutil",
         "dnspython",                
